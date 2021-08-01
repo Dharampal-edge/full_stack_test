@@ -1,11 +1,9 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
-import UserDao from '@daos/User/UserDao.mock';
-import { paramMissingError } from '@shared/constants';
-const userDao = new UserDao();
+import UserDo from 'src/model/User/User.mock';
+const userDo = new UserDo();
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
-import session from "express-session";
 /**
  * Get all users.
  * 
@@ -14,8 +12,7 @@ import session from "express-session";
  * @returns 
  */
 export async function getAllUsers(req: Request, res: Response) {
-    const users = await userDao.getAll();
-    console.log(users, "545454545");
+    const users = await userDo.getAll();
     return res.status(OK).json({ users });
 }
 
@@ -31,10 +28,10 @@ export async function addOneUser(req: Request, res: Response) {
     const { user } = req.body;
     if (!user) {
         return res.status(BAD_REQUEST).json({
-            error: paramMissingError,
+            error: "One or more of the required parameters was missing.",
         });
     }
-    await userDao.add(user);
+    await userDo.add(user);
     return res.status(CREATED).json({
         message: "Data Added in Json File"
     });

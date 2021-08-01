@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { getAllUsers, addOneUser } from './Users';
 
-import userAuthentication from "../middleware/middleware";
+import authenticateUser from "../middleware/middleware";
 
 // User-route
 const userRouter = Router();
-userRouter.get('/all', userAuthentication, getAllUsers);
-userRouter.post('/add', addOneUser);
+userRouter.get('/getAllUser', authenticateUser, getAllUsers);
+userRouter.post('/addUser', addOneUser);
 
 
 // Export the base-router

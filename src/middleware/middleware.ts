@@ -1,4 +1,3 @@
-
 import { Request, Response, NextFunction } from 'express';
 /**
  * Middleware
@@ -8,8 +7,8 @@ import { Request, Response, NextFunction } from 'express';
  * @param next
  * @returns 
  */
-export default async function authenticatedUser(req: Request, res: Response, next: NextFunction) {
-    if (req.headers.email !== undefined) {
+export default async function authenticateUser(req: Request, res: Response, next: NextFunction) {
+    if (req.headers.email === "test@gmail.com") {
         next();
     } else {
         return res.status(401).json({ message: "Unauthorised access!!" });

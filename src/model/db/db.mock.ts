@@ -7,9 +7,9 @@ interface IDatabase {
 }
 
 
-class MockDaoMock {
+class UserMock {
 
-    private readonly dbFilePath = 'src/daos/MockDb/MockDb.json';
+    private readonly dbFilePath = 'src/model/db/db.json';
 
 
     protected openDb(): Promise<IDatabase> {
@@ -22,4 +22,4 @@ class MockDaoMock {
     }
 }
 
-export default MockDaoMock;
+export default UserMock;
