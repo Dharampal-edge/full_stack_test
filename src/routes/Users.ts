@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 
 import UserDo from 'src/model/User/User.mock';
 const userDo = new UserDo();
-const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 /**
  * Get all users.
  * 
@@ -11,9 +10,9 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
  * @param res 
  * @returns 
  */
-export async function getAllUsers(req: Request, res: Response) {
+export async function getAllUser(req: Request, res: Response) {
     const users = await userDo.getAll();
-    return res.status(OK).json({ users });
+    return res.status(200).json({ users });
 }
 
 
@@ -24,15 +23,15 @@ export async function getAllUsers(req: Request, res: Response) {
  * @param res 
  * @returns 
  */
-export async function addOneUser(req: Request, res: Response) {
+export async function addUser(req: Request, res: Response) {
     const { user } = req.body;
     if (!user) {
-        return res.status(BAD_REQUEST).json({
+        return res.status(400).json({
             error: "One or more of the required parameters was missing.",
         });
     }
     await userDo.add(user);
-    return res.status(CREATED).json({
+    return res.status(201).json({
         message: "Data Added in Json File"
     });
 }
